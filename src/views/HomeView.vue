@@ -106,4 +106,5 @@ const selectPokemon = async (pokemon) => {
     max-height: 60vh;
   }
 }
+
 </style>  

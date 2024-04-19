@@ -9,11 +9,11 @@
         <img v-if="pokemon.name" :src="pokemon.img"   class="card-img-top pt-2" :alt="pokemon.name">
         <img v-else src="../assets/egg_pokemon.svg"  class="card-img-top pt-2" alt="???">
 
+        
         <div class="card-body">
             <h5 class="card-title text-center">{{pokemon.name || '???'}}</h5>
             <hr>
-            
-            <div class="col">
+            <div class="col mt-4">
                 <section class="col">
                     <strong>XP: </strong>
                     <span>{{pokemon.xp}}</span>
@@ -33,15 +33,10 @@
                     <strong>Peso: </strong>
                     <span>{{ pokemon.weight}} kg</span>
                 </section>
-
-                <section class="col">
-                    <strong>Tipos: </strong>
-                    <span>{{ pokemon.type}}</span>
-                </section>
               
-            </div>
-        </div>
-    </div>
+             </div>
+          </div>
+       </div>
 
 </template>
 
@@ -59,7 +54,7 @@
 
     @media (max-width: 768px) {
         .CardPokemonSelected{
-            height: 50vh;
+            height: 60vh;
             width: 50%;
             margin: 0 auto 10px auto;
         }
@@ -68,5 +63,17 @@
             height: 250px;
         }
     }
-   
+
+    @media (max-width: 500px) {
+        .CardPokemonSelected{
+            height: 60vh;
+            width: 50%;
+            margin: 0 auto 10px auto;
+        }
+
+        .CardPokemonSelected img {
+            height: 70px;
+        }
+    }
+    
 </style>
