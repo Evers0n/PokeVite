@@ -36,21 +36,46 @@ const selectPokemon = async (pokemon) => {
   console.log(pokemonSelected.value)
 }
 
+const changeLanguage = async (lang) => {
+  loading.value = true;
+  const pokemonId = pokemonSelected.value.id; 
+
+  try {
+    // Buscar os dados do Pokémon no idioma selecionado
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`);
+    const data = await response.json();
+
+    // Encontrar o nome do Pokémon no idioma desejado
+    const pokemonName = data.names.find(name => name.language.name === lang)?.name || pokemonSelected.value.name;
+
+    // Atualizar os dados do Pokémon com o novo nome e a nova descrição
+    pokemonSelected.value = {
+      ...pokemonSelected.value,
+      name: pokemonName,
+      description: data.flavor_text_entries.find(entry => entry.language.name === lang)?.flavor_text || pokemonSelected.value.description
+    };
+  } catch (error) {
+    console.error("Erro ao alterar o idioma:", error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+
+
 </script>
 
 <template>
   <main>
     <div class="container">
+      <div class="row mt-4">
+        <div class="col text-center">
+          <button @click="changeLanguage('en')" class="btn btn-primary">English</button>
+          <button @click="changeLanguage('es')" class="btn btn-primary">Spanish</button>
+          <button @click="changeLanguage('pt')" class="btn btn-primary">Portuguese</button>
+        </div>
+      </div>
         <div class="row mt-4">
-
-          <div>
-            <Translate />
-            <button class="btn btn-primary" @click="switchLanguage('en')"></button>
-            <button class="btn btn-primary" @click="switchLanguage('pt')"></button>
-            <button class="btn btn-primary" @click="switchLanguage('es')"></button>
-          </div>
-
-
           <div class="col-sm-12 col-md-6">
             <CardPokemonSelected
               :name="pokemonSelected?.name"
@@ -75,8 +100,8 @@ const selectPokemon = async (pokemon) => {
                   </div>
 
                   <ListPokemon 
-                    v-for="pokemon in pokemonFiltered"
-                    :key="pokemon.name"
+                    v-for="pokemon in pokemonFiltered" 
+                    :key="pokemon.name" 
                     :name="pokemon.name"
                     :urlBaseSvg="urlBaseSvg + pokemon.url.split('/')[6] + '.svg'"
                     @click="selectPokemon(pokemon)"
@@ -86,7 +111,7 @@ const selectPokemon = async (pokemon) => {
             </div>
           </div>
 
-
+          
   </div>
 </main>
 </template>
@@ -99,11 +124,16 @@ const selectPokemon = async (pokemon) => {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.btn{
+  padding-left: 10px; 
+  margin-left: 10px; 
+}
 
 @media (max-width: 768px) {
   .card-list{
     padding-top: auto;
     max-height: 60vh;
+    min-height: fit-content;
   }
 }
 
