@@ -65,9 +65,10 @@
 <style scoped>
 
     .CardPokemonSelected{
+        color: white;
         height: 62vh;
         background: rgb(72, 63, 251);
-        background: radial-gradient(circle, rgba(216, 150, 50, 0.8) 0%, rgba(254,128,24,0.5) 100%);    
+        background: radial-gradient(circle, rgba(245, 4, 4, 0.918) 0%, rgba(252, 3, 3, 0.5) 100%);    
     }
 
     .CardPokemonSelected img {
