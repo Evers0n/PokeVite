@@ -12,7 +12,7 @@ let pokemonSelected= reactive(ref())
 let loading = ref(false)
 
 onMounted(()=>{
-  fetch("https://pokeapi.co/api/v2/pokemon?limit=1500offset=0")
+  fetch("https://pokeapi.co/api/v2/pokemon?limit=200offset=0")
   .then(res => res.json())
   .then(res => pokemons.value = res.results);
 })
