@@ -29,7 +29,8 @@ let num = ref(0)
   <!--Footer do projeto-->
  <footer class="bg-primary text-light">
   <div>
-    Criado em {{ new Date().getFullYear() }}
+    <p class="named">Created by Everson |  
+    <a href="https://github.com/Evers0n/PokeVite" style="color: white;">  Source code on Github</a> |        Powered by PokeApi.co</p>
   </div>
   </footer>
 </template>
@@ -50,5 +51,8 @@ footer {
   height: 56px;
 }
 
+.named{
+  padding-top: 20px;
+}
 
 </style>

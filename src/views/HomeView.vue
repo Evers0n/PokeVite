@@ -2,7 +2,7 @@
 import {onMounted, reactive, ref, computed} from "vue";
 import ListPokemon from "../components/ListPokemon.vue"
 import CardPokemonSelected from "../components/CardPokemonSelected.vue"
-import Translate from "../components/Translate.vue"
+
 
 
 let urlBaseSvg = ref(("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/"));
