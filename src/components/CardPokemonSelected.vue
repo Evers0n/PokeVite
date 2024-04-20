@@ -1,5 +1,6 @@
 <script setup>
-    const pokemon = defineProps(["name", "xp", "height", "img" ,"loading", "id", "weight", "type"])
+    const pokemon = defineProps(["name", "xp", "height", "img" ,"loading", 
+    "id", "weight", "type", "order", "abilities"])
 
     const selectPokemon = async (pokemon) => {
   loading.value = true;
@@ -28,6 +29,7 @@
             <div class="card-body">
               <h5 class="card-title text-center">{{ pokemon.name || '???' }}</h5>
               <hr>
+             
               <div class="col mt-4">
                 <section class="col">
                   <strong>XP: </strong>
@@ -35,8 +37,8 @@
                 </section>
           
                 <section class="col">
-                  <strong>Altura: </strong>
-                  <span>{{ pokemon.height * 2.54 }} cm</span>
+                  <strong>Height: </strong>
+                  <span>{{ pokemon.height }}</span>
                 </section>
           
                 <section class="col">
@@ -45,16 +47,30 @@
                 </section>
           
                 <section class="col">
-                  <strong>Peso: </strong>
-                  <span>{{ pokemon.weight }} kg</span>
+                  <strong>Weight: </strong>
+                  <span>{{ pokemon.weight }}</span>
                 </section>
 
                 <section class="col">
-                    <strong>Tipos: </strong>
-                    <span v-if="pokemon.type">{{ pokemon.type.join(', ') }}</span>
-                    <span v-else>Desconhecido</span>
+                  <strong>Order: </strong>
+                  <span>{{ pokemon.order }}</span>
+                </section>
+
+                <section class="col">
+                    <strong>Type: </strong>
+                    <span>{{ pokemon.type }}</span>
+                </section>
+                  
+                  <section class="col">
+                    <strong>Abilities: </strong>
+                    <span>
+                      <span v-for="(ability, index) in abilities" :key="index">
+                        {{ ability }}
+                        <template v-if="index !== abilities.length - 1">, </template>
+                      </span>
+                    </span>
                   </section>
-             
+
               </div>
             </div>
           </div>

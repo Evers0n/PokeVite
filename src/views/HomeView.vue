@@ -36,31 +36,6 @@ const selectPokemon = async (pokemon) => {
   console.log(pokemonSelected.value)
 }
 
-const changeLanguage = async (lang) => {
-  loading.value = true;
-  const pokemonId = pokemonSelected.value.id; 
-
-  try {
-    // Buscar os dados do Pokémon no idioma selecionado
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`);
-    const data = await response.json();
-
-    // Encontrar o nome do Pokémon no idioma desejado
-    const pokemonName = data.names.find(name => name.language.name === lang)?.name || pokemonSelected.value.name;
-
-    // Atualizar os dados do Pokémon com o novo nome e a nova descrição
-    pokemonSelected.value = {
-      ...pokemonSelected.value,
-      name: pokemonName,
-      description: data.flavor_text_entries.find(entry => entry.language.name === lang)?.flavor_text || pokemonSelected.value.description
-    };
-  } catch (error) {
-    console.error("Erro ao alterar o idioma:", error);
-  } finally {
-    loading.value = false;
-  }
-};
-
 
 
 </script>
@@ -69,11 +44,7 @@ const changeLanguage = async (lang) => {
   <main>
     <div class="container">
       <div class="row mt-4">
-        <div class="col text-center">
-          <button @click="changeLanguage('en')" class="btn btn-primary">English</button>
-          <button @click="changeLanguage('es')" class="btn btn-primary">Spanish</button>
-          <button @click="changeLanguage('pt')" class="btn btn-primary">Portuguese</button>
-        </div>
+
       </div>
         <div class="row mt-4">
           <div class="col-sm-12 col-md-6">
@@ -84,7 +55,9 @@ const changeLanguage = async (lang) => {
               :img="pokemonSelected?.sprites.other.dream_world.front_default"
               :id="pokemonSelected?.id"
               :weight="pokemonSelected?.weight"
-              :type="pokemonSelected?.type"
+              :type="pokemonSelected?.types[0].type.name"
+              :order="pokemonSelected?.order"
+              :abilities="pokemonSelected?.abilities.map(ability => ability.ability.name)"
               :loading="loading"
             />
 

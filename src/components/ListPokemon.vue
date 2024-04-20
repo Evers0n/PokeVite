@@ -1,5 +1,6 @@
 <script setup>
     const pokemon = defineProps(["name", "urlBaseSvg"])
+
 </script>
 
 <template>
